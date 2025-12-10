@@ -81,18 +81,18 @@ const Index = () => {
       case 'chats':
         return (
           <div className="flex-1 flex overflow-hidden">
-            <div className="w-80 border-r border-border flex flex-col bg-card">
+            <div className="w-80 border-r border-border/50 flex flex-col glass">
               <div className="p-4 space-y-4">
                 <div className="relative">
                   <Icon name="Search" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
-                  <Input placeholder="Поиск чатов..." className="pl-10 bg-muted border-0" />
+                  <Input placeholder="Поиск чатов..." className="pl-10 glass-card border-white/10" />
                 </div>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="secondary" className="flex-1">
+                  <Button size="sm" variant="secondary" className="flex-1 glass-card border-white/10">
                     <Icon name="Users" size={16} className="mr-1" />
                     Все
                   </Button>
-                  <Button size="sm" variant="ghost" className="flex-1">
+                  <Button size="sm" variant="ghost" className="flex-1 glass-hover">
                     <Icon name="Briefcase" size={16} className="mr-1" />
                     Работа
                   </Button>
@@ -105,8 +105,8 @@ const Index = () => {
                     <div
                       key={chat.id}
                       onClick={() => setSelectedChat(chat.id)}
-                      className={`p-3 rounded-lg cursor-pointer transition-all hover:bg-accent/50 ${
-                        selectedChat === chat.id ? 'bg-accent' : ''
+                      className={`p-3 rounded-lg cursor-pointer glass-hover ${
+                        selectedChat === chat.id ? 'glass-card glow' : ''
                       } ${chat.pinned ? 'border-l-2 border-primary' : ''}`}
                     >
                       <div className="flex items-start gap-3">
@@ -142,7 +142,7 @@ const Index = () => {
             <div className="flex-1 flex flex-col">
               {selectedChat ? (
                 <>
-                  <div className="h-16 border-b border-border px-6 flex items-center justify-between bg-card/50 backdrop-blur-sm">
+                  <div className="h-16 border-b border-white/10 px-6 flex items-center justify-between glass">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl">
                         {mockChats.find(c => c.id === selectedChat)?.avatar}
@@ -169,7 +169,7 @@ const Index = () => {
                     <div className="space-y-4 max-w-4xl mx-auto">
                       {mockMessages.map(msg => (
                         <div key={msg.id} className={`flex ${msg.sent ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-                          <div className={`max-w-md ${msg.sent ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground' : 'bg-muted'} px-4 py-2.5 rounded-2xl ${msg.sent ? 'rounded-br-sm' : 'rounded-bl-sm'}`}>
+                          <div className={`max-w-md ${msg.sent ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground glow' : 'glass-card'} px-4 py-2.5 rounded-2xl ${msg.sent ? 'rounded-br-sm' : 'rounded-bl-sm'}`}>
                             <p className="text-sm">{msg.text}</p>
                             <span className={`text-xs mt-1 block ${msg.sent ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
                               {msg.time}
@@ -180,7 +180,7 @@ const Index = () => {
                     </div>
                   </ScrollArea>
 
-                  <div className="border-t border-border p-4 bg-card/50 backdrop-blur-sm">
+                  <div className="border-t border-white/10 p-4 glass">
                     <div className="flex gap-2 items-center max-w-4xl mx-auto">
                       <Button size="icon" variant="ghost">
                         <Icon name="Paperclip" size={20} />
@@ -190,12 +190,12 @@ const Index = () => {
                         value={messageText}
                         onChange={(e) => setMessageText(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="flex-1 bg-muted border-0"
+                        className="flex-1 glass-card border-white/10"
                       />
                       <Button size="icon" variant="ghost">
                         <Icon name="Smile" size={20} />
                       </Button>
-                      <Button size="icon" className="bg-gradient-to-r from-primary to-secondary" onClick={handleSendMessage}>
+                      <Button size="icon" className="bg-gradient-to-r from-primary to-secondary glow" onClick={handleSendMessage}>
                         <Icon name="Send" size={20} />
                       </Button>
                     </div>
@@ -204,7 +204,7 @@ const Index = () => {
               ) : (
                 <div className="flex-1 flex items-center justify-center">
                   <div className="text-center space-y-3">
-                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-5xl animate-pulse-glow">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-5xl glow animate-pulse-glow">
                       💬
                     </div>
                     <h3 className="text-xl font-heading font-bold">Выберите чат</h3>
@@ -222,15 +222,15 @@ const Index = () => {
             <div className="max-w-4xl mx-auto space-y-6">
               <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-heading font-bold">Контакты</h1>
-                <Button className="bg-gradient-to-r from-primary to-secondary">
+                <Button className="bg-gradient-to-r from-primary to-secondary glow">
                   <Icon name="UserPlus" size={18} className="mr-2" />
                   Добавить
                 </Button>
               </div>
-              <Input placeholder="Поиск контактов..." className="bg-muted border-0" />
+              <Input placeholder="Поиск контактов..." className="glass-card border-white/10" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {mockContacts.map(contact => (
-                  <div key={contact.id} className="bg-card p-6 rounded-xl border border-border hover:border-primary transition-all cursor-pointer group">
+                  <div key={contact.id} className="glass-card p-6 rounded-xl glass-hover cursor-pointer group">
                     <div className="flex items-start gap-4">
                       <div className="relative">
                         <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-3xl">
@@ -262,15 +262,15 @@ const Index = () => {
             <div className="max-w-4xl mx-auto space-y-6">
               <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-heading font-bold">Каналы</h1>
-                <Button className="bg-gradient-to-r from-primary to-secondary">
+                <Button className="bg-gradient-to-r from-primary to-secondary glow">
                   <Icon name="Plus" size={18} className="mr-2" />
                   Создать канал
                 </Button>
               </div>
-              <Input placeholder="Поиск каналов..." className="bg-muted border-0" />
+              <Input placeholder="Поиск каналов..." className="glass-card border-white/10" />
               <div className="space-y-4">
                 {mockChannels.map(channel => (
-                  <div key={channel.id} className="bg-card p-6 rounded-xl border border-border hover:border-primary transition-all cursor-pointer group">
+                  <div key={channel.id} className="glass-card p-6 rounded-xl glass-hover cursor-pointer group">
                     <div className="flex items-center gap-4">
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-3xl">
                         {channel.avatar}
@@ -300,15 +300,15 @@ const Index = () => {
         return (
           <div className="flex-1 p-8 overflow-auto">
             <div className="max-w-2xl mx-auto space-y-6">
-              <div className="bg-card p-8 rounded-xl border border-border text-center">
-                <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-6xl mb-4 animate-pulse-glow">
+              <div className="glass p-8 rounded-xl text-center">
+                <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-6xl mb-4 glow animate-pulse-glow">
                   👤
                 </div>
                 <h1 className="text-2xl font-heading font-bold mb-2">Ваше Имя</h1>
                 <p className="text-muted-foreground mb-4">@username</p>
                 <Badge variant="secondary" className="mb-6">Бизнес аккаунт</Badge>
                 <div className="flex gap-3 justify-center">
-                  <Button className="bg-gradient-to-r from-primary to-secondary">
+                  <Button className="bg-gradient-to-r from-primary to-secondary glow">
                     <Icon name="Edit" size={18} className="mr-2" />
                     Редактировать
                   </Button>
@@ -319,16 +319,16 @@ const Index = () => {
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-card p-6 rounded-xl border border-border text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">142</div>
+                <div className="glass-card p-6 rounded-xl text-center glass-hover">
+                  <div className="text-3xl font-bold text-primary text-glow mb-1">142</div>
                   <div className="text-sm text-muted-foreground">Контактов</div>
                 </div>
-                <div className="bg-card p-6 rounded-xl border border-border text-center">
-                  <div className="text-3xl font-bold text-secondary mb-1">8</div>
+                <div className="glass-card p-6 rounded-xl text-center glass-hover">
+                  <div className="text-3xl font-bold text-secondary text-glow mb-1">8</div>
                   <div className="text-sm text-muted-foreground">Каналов</div>
                 </div>
-                <div className="bg-card p-6 rounded-xl border border-border text-center">
-                  <div className="text-3xl font-bold text-accent mb-1">3.2K</div>
+                <div className="glass-card p-6 rounded-xl text-center glass-hover">
+                  <div className="text-3xl font-bold text-accent text-glow mb-1">3.2K</div>
                   <div className="text-sm text-muted-foreground">Сообщений</div>
                 </div>
               </div>
@@ -342,14 +342,14 @@ const Index = () => {
             <div className="max-w-6xl mx-auto space-y-6">
               <h1 className="text-3xl font-heading font-bold">Медиа</h1>
               <div className="flex gap-2">
-                <Button variant="secondary" size="sm">Все файлы</Button>
-                <Button variant="ghost" size="sm">Фото</Button>
-                <Button variant="ghost" size="sm">Видео</Button>
-                <Button variant="ghost" size="sm">Документы</Button>
+                <Button variant="secondary" size="sm" className="glass-card border-white/10">Все файлы</Button>
+                <Button variant="ghost" size="sm" className="glass-hover">Фото</Button>
+                <Button variant="ghost" size="sm" className="glass-hover">Видео</Button>
+                <Button variant="ghost" size="sm" className="glass-hover">Документы</Button>
               </div>
               <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
-                  <div key={i} className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg cursor-pointer hover:scale-105 transition-transform flex items-center justify-center text-4xl">
+                  <div key={i} className="aspect-square glass-card rounded-lg cursor-pointer glass-hover flex items-center justify-center text-4xl">
                     {['📸', '🎥', '📄', '🖼️', '🎵'][i % 5]}
                   </div>
                 ))}
@@ -372,7 +372,7 @@ const Index = () => {
                   { icon: 'Database', title: 'Хранилище', desc: 'Управление данными' },
                   { icon: 'Shield', title: 'Безопасность', desc: 'Двухфакторная аутентификация' },
                 ].map((item, i) => (
-                  <div key={i} className="bg-card p-4 rounded-xl border border-border hover:border-primary transition-all cursor-pointer group">
+                  <div key={i} className="glass-card p-4 rounded-xl glass-hover cursor-pointer group">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-muted group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary transition-all flex items-center justify-center">
                         <Icon name={item.icon as any} size={20} />
@@ -394,12 +394,12 @@ const Index = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground">
-      <div className="h-14 border-b border-border px-4 flex items-center justify-between bg-card/50 backdrop-blur-sm">
+      <div className="h-14 border-b border-white/10 px-4 flex items-center justify-between glass">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-sm">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-sm glow">
             TG
           </div>
-          <h1 className="text-xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent text-glow">
             Telegram Evolution
           </h1>
         </div>
@@ -418,21 +418,21 @@ const Index = () => {
       </div>
 
       <div className="flex-1 flex overflow-hidden">
-        <div className="w-20 border-r border-border flex flex-col items-center py-4 gap-2 bg-sidebar">
+        <div className="w-20 border-r border-white/10 flex flex-col items-center py-4 gap-2 glass">
           {navItems.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveSection(item.id)}
               className={`relative w-14 h-14 rounded-xl flex items-center justify-center transition-all ${
                 activeSection === item.id
-                  ? 'bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'bg-gradient-to-br from-primary to-secondary text-primary-foreground glow'
+                  : 'text-muted-foreground glass-hover'
               }`}
               title={item.label}
             >
               <Icon name={item.icon as any} size={24} />
               {item.badge && (
-                <Badge className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center p-0 text-xs bg-secondary border-2 border-sidebar">
+                <Badge className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center p-0 text-xs bg-secondary glow border-2 border-white/20">
                   {item.badge}
                 </Badge>
               )}
